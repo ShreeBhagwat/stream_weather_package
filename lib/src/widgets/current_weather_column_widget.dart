@@ -3,14 +3,14 @@ import 'package:stream_weather/src/widgets/current_weather_base_widget.dart';
 import 'package:stream_weather/stream_weather.dart';
 
 /// This widget fetches weather data using the provided [weatherClient] and
-/// displays it in a row format. It allows customization of various visual
+/// displays it in a Column format. It allows customization of various visual
 /// aspects such as text styles, icon size, background color, and more.
-class CurrentWeatherRowWidget extends CurrentWeatherBaseWidget {
+class CurrentWeatherColumnWidget extends CurrentWeatherBaseWidget {
   /// Make sure StreamWeather is initialised with API key.
   ///
   /// ```StreamWeather.initClient(apiKey: YOUR API KEY);```
   ///
-  /// A widget that displays the current weather information in a ```ROW``` Widget.
+  /// A widget that displays the current weather information in a ```Column``` Widget.
   /// Get the latest Weather based on the current location or by city name.
   /// Pass ```cityName``` as a parameter to get the weather of that city
   ///
@@ -30,8 +30,7 @@ class CurrentWeatherRowWidget extends CurrentWeatherBaseWidget {
   /// - [lon]: The longitude of the location for which to fetch weather data.
   /// - [unit]: The unit of measurement to use for weather data.
   /// - [dateTime]: The date and time for which to fetch weather data. ** Curently not in use**
-  ///
-  CurrentWeatherRowWidget({
+  CurrentWeatherColumnWidget({
     super.key,
     super.showWeatherIcon,
     super.iconSize,
@@ -47,16 +46,16 @@ class CurrentWeatherRowWidget extends CurrentWeatherBaseWidget {
     super.weatherTextStyle,
     super.temperatureTextStyle,
   })  : assert(
-          height == null || height > 100,
-          'The height must be greater than 100.',
+          height == null || height > 250,
+          'The height must be greater than 250.',
         ),
         assert(
-          width == null || width > 399,
-          '''The minimum width must be 400. Use CurrentWeatherCubeInstead for Smaller Widths.''',
+          width == null || width > 149,
+          'The minimum width must be 150. Use CurrentWeatherRowWidget for larger Widths.',
         ),
         assert(
-          iconSize == null || iconSize > 0 && iconSize < height!,
-          'The icon size must be greater than 0 and less than 100',
+          iconSize != null || iconSize! < height!,
+          'The icon size must be greater than 0 and less than height',
         ),
         assert(cityName != null || lat != null && lon != null,
             'Please provide either cityName or lat and lon arguments to fetch weather data.'),
@@ -64,24 +63,31 @@ class CurrentWeatherRowWidget extends CurrentWeatherBaseWidget {
 
   /// The unit of measurement to use for weather data.
   final WeatherUnit unit;
-
   @override
-  State<CurrentWeatherRowWidget> createState() =>
-      _CurrentWeatherRowWidgetState();
+  State<CurrentWeatherColumnWidget> createState() =>
+      _CurrentWeatherColumnWidgetState();
 }
 
-class _CurrentWeatherRowWidgetState
-    extends CurrentWeatherBaseWidgetState<CurrentWeatherRowWidget> {
+class _CurrentWeatherColumnWidgetState
+    extends CurrentWeatherBaseWidgetState<CurrentWeatherColumnWidget> {
+  /// Builds the weather information widget.
   @override
   Widget buildWeatherWidget() {
     return Stack(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  weatherModel!.name!,
+                  style: widget.weatherTextStyle,
+                ),
                 if (widget.showWeatherIcon)
                   Text(
                     weatherService.getWeatherIcon(
@@ -93,16 +99,6 @@ class _CurrentWeatherRowWidgetState
                   weatherModel!.weather![0].main!,
                   style: widget.weatherTextStyle,
                 ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  weatherModel!.name!,
-                  style: widget.weatherTextStyle,
-                ),
                 Text(
                   switchTemparatureAsPerUnit(
                       weatherModel!.main!.temp!, widget.unit),
@@ -110,7 +106,7 @@ class _CurrentWeatherRowWidgetState
                 ),
               ],
             ),
-          ],
+          ),
         ),
         Positioned(
           right: 0,

@@ -12,8 +12,8 @@ class DioClientOptions {
   /// a map of HTTP headers to include in the request.
   const DioClientOptions({
     String? baseUrl,
-    this.connectTimeout = const Duration(seconds: 5),
-    this.receiveTimeout = const Duration(seconds: 5),
+    this.connectTimeout = const Duration(seconds: 30),
+    this.receiveTimeout = const Duration(seconds: 30),
     this.queryParameters = const {},
     this.headers = const {},
   }) : baseUrl = baseUrl ?? kBaseUrl;

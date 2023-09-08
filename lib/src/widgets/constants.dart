@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 const double kHeight = 200;
 const kBackgroundColor = Colors.black;
-const kTemparatureTextStyle = TextStyle(
+const kTemperatureTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 20,
 );

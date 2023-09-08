@@ -5,9 +5,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:stream_weather/stream_weather.dart';
 import 'package:test/test.dart';
 
-
-
-
 class MockDioClient extends Mock implements DioClient {}
 
 void main() {
