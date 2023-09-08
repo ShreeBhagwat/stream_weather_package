@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stream_weather/src/utils/cache_service.dart';
 import 'package:stream_weather/stream_weather.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart'; 
 
 class MockDioClient extends Mock implements DioClient {}
 
