@@ -1,13 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:stream_weather/src/utils/cache_service.dart';
 import 'package:stream_weather/stream_weather.dart';
 import 'package:test/test.dart';
 
 class MockDioClient extends Mock implements DioClient {}
 
+class MockCacheManager extends Mock implements CacheService {}
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   StreamWeather.initClient(apiKey: 'test');
   group('WeatherService', () {
     late WeatherService weatherService;

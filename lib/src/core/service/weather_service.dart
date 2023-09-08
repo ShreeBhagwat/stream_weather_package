@@ -29,7 +29,7 @@ class WeatherService extends ABWeatherService {
   final weatherClient = WeatherClient.instance;
 
   /// The [DefaultCacheManager] used for caching weather data.
-  final cacheManager = DefaultCacheManager();
+  DefaultCacheManager cacheManager = DefaultCacheManager();
 
   /// Returns the weather data for a specific city by its [cityName].
   /// Make sure StreamWeather is initialised with API key.
@@ -48,6 +48,7 @@ class WeatherService extends ABWeatherService {
       {String cityName = 'Amsterdam', bool refreshData = false}) async {
     // Check if the weather data is cached
     final cacheService = CacheService(cacheManager);
+    
     final cachedFile = await cacheService.getDataFromCache(
         '/data/2.5/weather?q=$cityName&appid=${weatherClient.apiKey}&units=${weatherClient.unit.name}');
 

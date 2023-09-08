@@ -116,6 +116,7 @@ class _CurrentWeatherRowWidgetState
           right: 0,
           top: 0,
           child: IconButton(
+            key: const ValueKey('REFRESH_ICON'),
             onPressed: refreshWeather,
             icon: Icon(
               Icons.refresh,
