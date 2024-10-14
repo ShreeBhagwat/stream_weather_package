@@ -7,8 +7,9 @@ void main() {
   // Initialize the StreamWeather client with your API key and unit of measurement.
   // Use openweathermap.org to get your API key.
   // Use WeatherUnit.metric for metric units or WeatherUnit.imperial for imperial units.
-  StreamWeather.initClient(apiKey: WEATHER_API_KEY, unit: WeatherUnit.metric);
-  runApp(const WeatherExampleApp()); // Run the WeatherExampleApp as the main widget.
+  StreamWeather.initClient(apiKey: WEATHER_API_KEY, unit: WeatherUnit.imperial);
+  runApp(
+      const WeatherExampleApp()); // Run the WeatherExampleApp as the main widget.
 }
 
 // Define the WeatherExampleApp class as a StatefulWidget.
@@ -21,7 +22,8 @@ class WeatherExampleApp extends StatefulWidget {
 
 // Define the _WeatherExampleAppState class as the app's state.
 class _WeatherExampleAppState extends State<WeatherExampleApp> {
-  WeatherUnit unit = WeatherUnit.metric; // Initialize the unit of measurement to metric.
+  WeatherUnit unit =
+      WeatherUnit.metric; // Initialize the unit of measurement to metric.
   String cityName = 'Pune'; // Initialize the default city name.
   final TextEditingController _cityNameController = TextEditingController();
 
@@ -36,7 +38,7 @@ class _WeatherExampleAppState extends State<WeatherExampleApp> {
             TextButton(
               child: Text(
                 unit == WeatherUnit.metric ? '°C' : '°F',
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
               onPressed: () {
                 // Toggle between metric and imperial units when the button is pressed.
@@ -98,7 +100,8 @@ class _WeatherExampleAppState extends State<WeatherExampleApp> {
                         onPressed: () {
                           log('Button Pressed'); // Log a message when the button is pressed.
                           setState(() {
-                            cityName = _cityNameController.text; // Update the city name.
+                            cityName = _cityNameController
+                                .text; // Update the city name.
                           });
                         },
                         icon: const Icon(Icons.search))
